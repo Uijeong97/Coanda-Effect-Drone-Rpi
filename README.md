@@ -1,7 +1,7 @@
 # Coanda-Effect-Drone-Rpi 
-<hr>
-## Class 정리
-### Servo.py
+<hr><Br>
+## Class 정리 <br>
+### Servo.py 
 Servo Motor Class <Br>
 code example)
 <pre>
