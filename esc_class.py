@@ -18,9 +18,7 @@ class bldc_motor:
 		self.init_speed = start # init speed
 		pi = pigpio.pi();
 		pi.set_servo_pulsewidth(ESC, 0) 
-		print "For first time launch, select calibrate"
-		print "Type the exact word for the function you want"
-		print "calibrate OR manual OR control OR arm OR stop"
+		
 
 	def manual_drive(): #You will use this function to program your ESC if required
 
@@ -122,20 +120,5 @@ class bldc_motor:
  
 
 #This is the start of the program actually, to start the function it needs to be initialized before calling... stupid python.    
-
-	inp = raw_input()
-
-	if inp == "manual":
-	    manual_drive()
-	elif inp == "calibrate":
-	    calibrate()
-	elif inp == "arm":
-	    arm()
-	elif inp == "control":
-	    control()
-	elif inp == "stop":
-	    stop()
-	else :
-	    print "Thank You for not following the things I'm saying... now you gotta restart the program STUPID!!"
 
 	     
