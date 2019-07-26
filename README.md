@@ -1,5 +1,6 @@
 # Coanda-Effect-Drone-Rpi 
-
+<hr>
+## Class 정리
 ### Servo.py
 Servo Motor Class <Br>
 code example)
@@ -24,3 +25,4 @@ x_angle = gyro.get_x_rotation(accel_x, accel_y, accel_z)
 y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
 
 </pre>
+<hr>
