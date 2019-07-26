@@ -41,12 +41,46 @@ y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
 
 
 ## RPi - Device(including Sensor) 연결 <br>
+### RPi GPIO
+<img src="/image/GPIO.png" title="BLDC" width="300" height="300">
+<br>
+
+
 ### BLDC Motor
 <img src="/image/BLDC.png" title="BLDC" width="500" height="300">
-검정선 -> Ground
-흰선 -> GPIO
-<p></p>
+<pre>
+검정선 -> Raspberrypi GND
+흰선   -> Raspberrypi GPIO
+</pre>
+<br>
+
+
 ### Servo Motor
-<img src="/image/Servo.png" title="BLDC" width="500" height="300">
-검정선 -> GND
-흰선 -> GPIO
+<img src="/image/Servo.PNG" title="Servo" width="400" height="300">
+<pre>
+빨간선 -> Raspberrypi Voltage, 3.3V or 5V 
+주황선 -> Raspberrypi GPIO 
+갈색선 -> Raspberrypi GND 
+</pre>
+<br>
+
+
+### Gyro Sensor
+<img src="/image/Gyro.png" title="Gyro" width="400" height="300">
+<pre>
+GYRO VCC  –> Raspberrypi Vortage, 3.3V or 5V
+GYRO GND  –> Raspberrypi GND
+GYRO SCL  –> Raspberrypi SCL
+GYRO SDA  –> Raspberrypi SDA
+</pre>
+<br>
+
+
+### GPS Sensor
+<img src="/image/GPS.png" title="Gyro" width="400" height="300">
+<pre>
+GYRO VCC  –> Raspberrypi Vortage, 3.3V or 5V
+GYRO GND  –> Raspberrypi GND
+GYRO SCL  –> Raspberrypi SCL
+GYRO SDA  –> Raspberrypi SDA
+</pre>
