@@ -17,7 +17,7 @@ class Servo:
         self.GPIO = GPIO
         self.GPIO.setup(pin, self.GPIO.OUT)
         self.power = self.GPIO.PWM(pin, self.hz)
-        #self.power.start(7.3)
+        self.power.start(7.3)
 
     # Set motor speed (increase|decrease|0-100)
     def set_speed(self, speed):
@@ -50,9 +50,9 @@ class Servo:
         if exit == True:
             self.GPIO.cleanup()
     
-    def motor_control(self, x_angle):
+    def motor_ctrl(self, angle):
         for i in range(3,13):
-            desiredPosition=x_angle
+            desiredPosition=angle
             DC=1./18*(desiredPosition)+7.3 #servo initial position
-            self.power.ChangeDutyCytle(DC)
+            self.power.ChangeDutyCycle(DC)
     
