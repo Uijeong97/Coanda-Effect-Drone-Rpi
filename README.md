@@ -9,7 +9,7 @@
 
 <img src="/image/192.168.2.189.png" title="192.168.2.189" width="300" height="300"> <img src="/image/192.168.2.199.png" title="192.168.2.199" width="300" height="300">
 
-<hr>
+<hr><br><br>
 
 ## Class 사용법 <br>
 ### Servo.py 
@@ -38,7 +38,7 @@ x_angle = gyro.get_x_rotation(accel_x, accel_y, accel_z)
 y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
 
 </pre>
-<hr>
+<hr><Br><br>
 
 
 
