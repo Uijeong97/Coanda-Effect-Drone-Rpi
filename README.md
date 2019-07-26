@@ -38,3 +38,15 @@ y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
 </pre>
 <hr>
 
+
+
+## RPi - Device(including Sensor) 연결 <br>
+### BLDC Motor
+<img src="/image/BLDC.png" title="BLDC" width="500" height="300">
+검정선 -> Ground
+흰선 -> GPIO
+<p></p>
+### Servo Motor
+<img src="/image/Servo.png" title="BLDC" width="500" height="300">
+검정선 -> GND
+흰선 -> GPIO
