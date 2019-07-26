@@ -1,5 +1,14 @@
 # Coanda-Effect-Drone-Rpi 
-## Class 정리 <br>
+## Rpi 접속 <br>
+<pre>
+1. RPI 전원 연결
+2. window 환경이라면, 원격데스크톱(remote desktop) 열기
+3. 192.168.2.199 입력 (ksq ip)
+4. shell 을 켠 뒤, cd CEDR
+</pre>
+
+
+## Class 사용법 <br>
 ### Servo.py 
 Servo Motor Class <Br>
 code example)
@@ -11,6 +20,8 @@ servo_2 = Servo(17, GPIO)     # pin is GPIO pin number
 
 servo_1.motor_ctrl(argument)
 </pre>
+
+
 
 ### Gyro.py
 Gyro Class <Br>
@@ -25,3 +36,4 @@ y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
 
 </pre>
 <hr>
+
