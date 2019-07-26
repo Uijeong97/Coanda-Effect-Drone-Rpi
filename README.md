@@ -6,8 +6,9 @@
 3. 192.168.2.199 or 192.168.2.189 입력
 4. shell 을 켠 뒤, cd CEDR
 </pre>
-<img src="/image/192.168.2.189.png" width="300" height="300">
-<img src="/image/192.168.2.199.png" width="300" height="300">
+
+<img src="/image/192.168.2.189.png" title="192.168.2.189" width="300" height="300">
+<img src="/image/192.168.2.199.png" title="192.168.2.199" width="300" height="300">
 
 ## Class 사용법 <br>
 ### Servo.py 
