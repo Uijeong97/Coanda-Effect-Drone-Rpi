@@ -3,9 +3,10 @@
 <pre>
 1. RPI 전원 연결
 2. window 환경이라면, 원격데스크톱(remote desktop) 열기
-3. 192.168.2.199 입력 (ksq ip)
+3. 192.168.2.199 or 192.168.2.189 입력
 4. shell 을 켠 뒤, cd CEDR
 </pre>
+
 
 
 ## Class 사용법 <br>
