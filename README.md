@@ -9,6 +9,8 @@
 
 <img src="/image/192.168.2.189.png" title="192.168.2.189" width="300" height="300"> <img src="/image/192.168.2.199.png" title="192.168.2.199" width="300" height="300">
 
+<hr>
+
 ## Class 사용법 <br>
 ### Servo.py 
 Servo Motor Class <Br>
