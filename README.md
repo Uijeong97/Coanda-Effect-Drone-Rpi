@@ -13,7 +13,7 @@ servo_1.motor_ctrl(argument)
 </pre>
 
 ### Gyro.py
-Gyro Class
+Gyro Class <Br>
 code example)
 <pre>
 from Gyro import Gyro
