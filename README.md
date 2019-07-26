@@ -1,7 +1,7 @@
 # Coanda-Effect-Drone-Rpi 
 
 ### Servo.py
-Servo Motor Class
+Servo Motor Class <Br>
 code example)
 <pre>
 from Servo import Servo
