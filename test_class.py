@@ -1,3 +1,9 @@
+#import os, time
+
+#os.system ("sudo pigpiod") #Launching GPIO library
+#time.sleep(1) 
+
+#import pigpio
 from esc_class import bldc_motor
 
 var = bldc_motor(4, 2000, 700, 800)

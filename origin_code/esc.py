@@ -182,7 +182,7 @@ def control():
 
         else:
 
-            print 0!! Press a,q,d or e"
+            print "!! Press a,q,d or e"
 
             
 
