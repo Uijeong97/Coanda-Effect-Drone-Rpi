@@ -7,6 +7,12 @@ import RPi.GPIO as GPIO
 from Servo import Servo
 from Gyro import Gyro
 
+# ---------------------------------------
+#  servo_1 은 gyro x 축에 의해 움직이도록
+#  servo_2 는 gyro y 축에 의해 움직이도록
+#  작성된 코드입니다. (오차는 있을 수 있음)
+# ---------------------------------------
+
 GPIO.setmode(GPIO.BCM)
 
 servo_1 = Servo(18, GPIO)
