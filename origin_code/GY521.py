@@ -60,7 +60,6 @@ class Gyro:
 gyro=Gyro(1);
 try:
     while True:
-        time.sleep(1)
         print "------------"
         print "=> gyro data"
         print "-------------"

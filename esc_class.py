@@ -58,8 +58,8 @@ class bldc_motor:
             self.pi.set_servo_pulsewidth(self.ESC, self.min_value)
             time.sleep(1)
             print "See.... uhhhhh"
-
-            self.control() # You can change this to any other function you want
+            self.pi.set_servo_pulsewidth(self.ESC, self.init_speed)
+          #  self.control() # You can change this to any other function you want
 
     def control(self): 
         print "I'm Starting the motor, I hope its calibrated and armed, if not restart by giving 'x'"
@@ -111,7 +111,8 @@ class bldc_motor:
             self.control()
 
     def stop(self): #This will stop every action your Pi is performing for ESC ofcourse.
-    
+        self.pi.set_servo_pulsewidth(self.ESC, 0)
+        
     def keyUp(self):
         self.speed += 50
         self.pi.set_servo_pulsewidth(self.ESC, self.speed)
