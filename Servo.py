@@ -22,17 +22,11 @@ class Servo:
     # Set motor speed (increase|decrease|0-100)
     def set_speed(self, speed):
         if speed == "increase":
-            new_speed = self.get_speed()+1
+            self.power.ChangeDutyCycle(2.5)
         elif speed == "decrease":
-            new_speed = self.get_speed()-1
+            self.power.ChangeDutyCycle(12.5)
         else:
-            new_speed = speed
-        if new_speed < 0:
-            new_speed = 0
-        elif new_speed > 100:
-            new_speed = 100
-        self.speed = new_speed
-        self.power.ChangeDutyCycle(new_speed/10)
+            self.power.ChangeDutyCycle(7.5)
 
     # Get current motor speed
     def get_speed(self):
