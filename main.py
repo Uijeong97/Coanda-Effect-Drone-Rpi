@@ -12,7 +12,7 @@ from esc_class import bldc_motor
 
 # ---------------------------------------
 
-GPIO.setmode(GPIO.BOARD)
+# GPIO.setmode(GPIO.BOARD)
 GPIO.setmode(GPIO.BCM)
 
 
