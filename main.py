@@ -6,6 +6,7 @@ from time import sleep  # time module
 import RPi.GPIO as GPIO
 from Servo import Servo
 from Gyro import Gyro
+from Esc import bldc_motor
 
 # ---------------------------------------
 
@@ -18,17 +19,26 @@ GPIO.setmode(GPIO.BCM)
 print 'Initializing sensors and misc boards...'
 
 gyro = Gyro()
-# gps = GPS() # 모듈 시킨거 안왔습니당
+# gps = GPS() # 모듈 시킨거 안 왔음
 
 
-
-print 'Initializing motors...'
+print 'Initializing servo motors...'
 
 servo_1 = Servo(18, GPIO)
 servo_2 = Servo(17, GPIO)
+# servo_3 = Servo(17, GPIO)
+# servo_4 = Servo(17, GPIO)
+# servo_5 = Servo(17, GPIO)
+# servo_6 = Servo(17, GPIO)
 
 
 print 'Waiting for commands...'
+
+print '<--------command content-------->'
+print '\bw     ↑'
+print 'asd    ←↓→'
+
+
 
 while True:
 	command = raw_input('Enter command: ')
