@@ -6,7 +6,7 @@ from time import sleep  # time module
 import RPi.GPIO as GPIO
 from Servo import Servo
 from Gyro import Gyro
-from Esc import bldc_motor
+from esc_class import bldc_motor
 
 # ---------------------------------------
 
@@ -31,28 +31,50 @@ servo_2 = Servo(17, GPIO)
 # servo_5 = Servo(17, GPIO)
 # servo_6 = Servo(17, GPIO)
 
+motor = bldc_motor(4, 2000, 700, 800)
 
 print 'Waiting for commands...'
 
 print '<--------command content-------->'
-print '\bw     ↑'
-print 'asd    ←↓→'
+print '[bldc ctrl]   |   [servo ctrl]'
+print '     k        |         w'
+print '     l        |       a s d'
+print 'k,l: fast, slow'
+print 'w,s: front, rear'
+print 'a,d: left, right'
 
+try:
+	while True:
+		accel_x,accel_y,accel_z = gyro.get_accel_data_g()
+        	x_angle = gyro.get_x_rotation(accel_x, accel_y, accel_z)
+        	y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
+        
+        	servo_1.motor_ctrl(x_angle)
+        	servo_2.motor_ctrl(y_angle)
+		
+		command = raw_input('Enter command: ')
+	
+		if command == 'k':
+			motor.keyUp()
+		elif command == 'l':
+			motor.keyDown()
+		
+		elif command == 'w':
+			servo_1.set_speed('increase')
+			time.sleep(1)
+		elif command == 's':
+			servo_1.set_speed('decrease')
+			time.sleep(1)
+		elif command == 'a':
+			servo_2.set_speed('increase')
+			time.sleep(1)
+		elif command == 'd':
+			servo_2.set_speed('decrease')
+			time.sleep(1)
 
+except KeyboardInterrup:
+	print '== servo stop =='
 
-while True:
-	command = raw_input('Enter command: ')
-
-	if command == 'increase front':
-		front_left.set_speed('increase')
-		front_right.set_speed('increase')
-
-	elif command == 'increase back':
-		rear_left.set_speed('increase')
-		rear_right.set_speed('increase')
-
-	elif command == 'speed 50':
-		front_left.set_speed(50)
-		front_right.set_speed(50)
-		rear_left.set_speed(50)
-		rear_right.set_speed(0)
+servo_1.stop()
+servo_2.stop()
+motor.stop()
