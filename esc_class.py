@@ -17,7 +17,7 @@ class bldc_motor:
         self.init_speed = start # init speed
         self.pi = pigpio.pi();
         self.pi.set_servo_pulsewidth(ESC, 0) 
-        
+        self.speed = start # ctrlable speed
 
     def manual_drive(self): #You will use this function to program your ESC if required
         print "You have selected manual option so give a value between 0 and you max value"    
@@ -96,7 +96,7 @@ class bldc_motor:
                 break   
             else:
                 print "!! Press a,q,d or e"
-
+    
     def arm(self): #This is the arming procedure of an ESC 
         print "Connect the battery and press Enter"
         inp = raw_input()    
@@ -111,9 +111,13 @@ class bldc_motor:
             self.control()
 
     def stop(self): #This will stop every action your Pi is performing for ESC ofcourse.
-
-        self.pi.set_servo_pulsewidth(self.ESC, 0)
-        self.pi.stop()
-
+    
+    def keyUp(self):
+        self.speed += 50
+        self.pi.set_servo_pulsewidth(self.ESC, self.speed)
+    
+    def keyDown(self):
+        self.speed -= 50
+        self.pi.set_servo_pulsewidth(self.ESC, self.speed)
 
          
