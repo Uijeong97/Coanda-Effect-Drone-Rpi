@@ -2,9 +2,12 @@
 ## Rpi 접속 <br>
 <pre>
 1. RPI 전원 연결
-2. window 환경이라면, 원격데스크톱(remote desktop) 열기
+2. window -> 원격데스크톱(remote desktop) 열기
+   Mac OS -> microsoft remote desktop 어플 다운 
 3. 192.168.2.199 or 192.168.2.189 입력
 4. shell 을 켠 뒤, cd CEDR
+
+* 와이파이 연결이 KSQ Student 로 되어있어야 함
 </pre>
 
 <img src="/image/192.168.2.189.png" title="192.168.2.189" width="300" height="300"> <img src="/image/192.168.2.199.png" title="192.168.2.199" width="300" height="300">
