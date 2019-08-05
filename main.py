@@ -75,7 +75,7 @@ try:
         elif command == 'c':
             motor.calibrate()
             
-except KeyboardInterrup:
+except KeyboardInterrupt:
     print '== servo stop =='
 
 servo_1.stop()

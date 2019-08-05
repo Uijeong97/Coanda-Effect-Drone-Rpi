@@ -4,23 +4,70 @@
 #time.sleep(1) 
 
 #import pigpio
+import sys
+import smbus
+import math
+import time
+from time import sleep  # time module
+import RPi.GPIO as GPIO
+from Servo import Servo
 from esc_class import bldc_motor
 
-var = bldc_motor(4, 2000, 700, 800)
-print "For first time launch, select calibrate"
-print "Type the exact word for the function you want"
-print "calibrate OR manual OR control OR arm OR stop"
+GPIO.setmode(GPIO.BCM)
+
+motor = bldc_motor(4, 2000, 700, 800)
+servo_1 = Servo(18, GPIO)
+servo_2 = Servo(17, GPIO)
+print "For first time launch, enter calibrate"
+print "else, skip"
 
 inp = raw_input()
-if inp == "manual":
-    var.manual_drive()
-elif inp == "calibrate":
-    var.calibrate()
-elif inp == "arm":
-    var.arm()
-elif inp == "control":
-    var.control()
-elif inp == "stop":
-    var.stop()
+if inp == "calibrate":
+    motor.calibrate()
 else :
-    print "Thank You for not following the things I'm saying... now you gotta restart the program STUPID!!"
+    print "program start"
+
+print 'Waiting for commands...'
+
+print '<--------command content-------->'
+print '[bldc ctrl]   |   [servo ctrl]'
+print '     k        |         w'
+print '     l        |       a s d'
+print 'k,l: fast, slow'
+print 'w,s: front, rear'
+print 'a,d: left, right\n\n'
+
+try:
+    while True:
+        
+        command = raw_input('Enter command: ')
+    
+        if command == 'k':
+            motor.keyUp()
+        elif command == 'l':
+            motor.keyDown()
+        
+        elif command == 'w':
+            servo_1.set_speed('increase')
+            time.sleep(1)
+        elif command == 's':
+            servo_1.set_speed('decrease')
+            time.sleep(1)
+        elif command == 'a':
+            servo_2.set_speed('increase')
+            time.sleep(1)
+        elif command == 'd':
+            servo_2.set_speed('decrease')
+            time.sleep(1)
+        elif command == 'stop':
+            servo_1.stop()
+            servo_2.stop()
+            motor.stop()
+        
+            
+except KeyboardInterrupt:
+    print '== servo stop =='
+
+servo_1.stop()
+servo_2.stop()
+motor.stop()
