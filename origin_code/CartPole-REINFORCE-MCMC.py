@@ -2,9 +2,11 @@ import tensorflow as tf
 import gym
 import numpy as np
 from gym import wrappers
+
 # GLOBAL SETTINGS
 RNG_SEED = 8
 ENVIRONMENT = "CartPole-v0"
+
 # ENVIRONMENT = "CartPole-v1"
 MAX_EPISODES = 1000
 HIDDEN_LAYER = True
@@ -13,6 +15,7 @@ DISPLAY_WEIGHTS = False  # Help debug weight update
 RENDER = False  # Render the generation representative
 gamma = 0.99  # Discount per step
 alpha = 0.02205  # Learning rate
+
 # Upload to OpenAI
 # UPLOAD = False
 # EPISODE_INTERVAL = 50  # Generate a video at this interval
@@ -21,9 +24,14 @@ alpha = 0.02205  # Learning rate
 SUCCESS_THRESHOLD = 195
 # SUCCESS_THRESHOLD = 475
 CONSECUTIVE_TARGET = 100
+
+
+
 def record_interval(n):
    global EPISODE_INTERVAL
    return n % EPISODE_INTERVAL == 0
+
+
 env = gym.make(ENVIRONMENT)
 # if UPLOAD:
 #     env = wrappers.Monitor(env, SESSION_FOLDER, video_callable=record_interval)
@@ -32,15 +40,23 @@ np.random.seed(RNG_SEED)
 tf.set_random_seed(RNG_SEED)
 input_size = env.observation_space.shape[0]
 env._max_episode_steps = 20001 #최대 유지 횟수
+
+
+
 try:
    output_size = env.action_space.n # 수정
+   
 except AttributeError:
    output_size = env.action_space.n
+   
+   
 # Tensorflow network setup
 x = tf.placeholder(tf.float32, shape=(None, input_size))
 y = tf.placeholder(tf.float32, shape=(None, 1))
 expected_returns = tf.placeholder(tf.float32, shape=(None, 1))
 w_init = tf.contrib.layers.xavier_initializer()
+
+
 if HIDDEN_LAYER:
    hidden_W = tf.get_variable("W1", shape=[input_size, HIDDEN_SIZE], initializer=w_init) #히든사이즈 조정해 보자
    hidden_B = tf.Variable(tf.zeros(HIDDEN_SIZE))
@@ -50,10 +66,13 @@ if HIDDEN_LAYER:
    #지수 선형 유닛(ELU, Exponential Linear Unit) 함수는 softplus 함수와 비슷하지만 하부 점근선이 -1입니다.
    #x<0일 때는 exp(x)+1이고, 그외에는 x입니다.
    dist = tf.tanh(tf.matmul(hidden, dist_W) + dist_B) # hidden - [input, hidden], dist_w - [hidden, output] --> 즉 1행 2열의 데이터가 나옴
+   
 else:
    dist_W = tf.get_variable("W1", shape=[input_size, output_size], initializer=w_init)
    dist_B = tf.Variable(tf.zeros(output_size))
    dist = tf.tanh(tf.matmul(x, dist_W) + dist_B)
+   
+   
 dist_soft = tf.nn.log_softmax(dist)
 dist_in = tf.matmul(dist_soft, tf.Variable([[1.], [0.]])) # <tf.Variable 'Variable_3:0' shape=(2, 1) dtype=float32_ref>
 #1행 2열의 dist_soft에 2행 1열의 Variable([[1.], [0.]]) 을 곱함 --> 하나의 값이 나올듯.. 이 값은 dist_in의 1행 1열의 데이터
@@ -68,6 +87,8 @@ optimizer = tf.train.RMSPropOptimizer(alpha) #따라서 RMSProp에서는 일정�
 train = optimizer.minimize(-1.0 * expected_returns * log_pi)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
+
+
 def run_episode(environment, render=False):
    raw_reward = 0
    discounted_reward = 0
@@ -93,6 +114,8 @@ def run_episode(environment, render=False):
        discount *= gamma # 감마가 0.99이기 때문에 디스카운트는 점점 작아짐. --> 초기학습률이 나중보다 높음. 나중에는 안정성이 더해질듯
    return raw_reward, discounted_reward, cumulative_reward, states, actions # 보상누적합raw, 보상누적합disc, 보상리스트, 상태리스트, 액션리스트
    #에피소드 끝(드론이 땅에 충돌 등)에 해당 상태에서 어떤 액션을 해서 어떤 리워드를 받았는지 저장된 리스트를 리턴
+   
+   
 def display_weights(session):
    global HIDDEN_LAYER
    if HIDDEN_LAYER:
@@ -105,7 +128,11 @@ def display_weights(session):
        w1 = session.run(dist_W)
        b1 = session.run(dist_B)
        print(w1, b1)
+         
+         
 returns = []
+
+
 for ep in range(MAX_EPISODES): #MAX_EPISODES 수 만큼 진행
    raw_G, discounted_G, cumulative_G, ep_states, ep_actions = run_episode(env, RENDER and not UPLOAD)
    expected_R = np.transpose([discounted_G - np.array(cumulative_G)])
@@ -125,6 +152,7 @@ for ep in range(MAX_EPISODES): #MAX_EPISODES 수 만큼 진행
    msg = "Episode: {}, Return: {}, Last {} returns mean: {}"
    msg = msg.format(ep, raw_G, CONSECUTIVE_TARGET, mean_returns)
    print(msg)
+   
 env.close()
 # if UPLOAD:
 #     gym.upload(SESSION_FOLDER, api_key=API_KEY)
