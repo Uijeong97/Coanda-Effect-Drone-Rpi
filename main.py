@@ -6,7 +6,7 @@ from time import sleep  # time module
 import RPi.GPIO as GPIO
 from Servo import Servo
 from Gyro import Gyro
-from esc_class import bldc_motor
+from bldc_motor import bldc_motor
 
 # ---------------------------------------
 
