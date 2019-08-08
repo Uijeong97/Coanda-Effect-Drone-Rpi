@@ -32,12 +32,14 @@ def record_interval(n):
    return n % EPISODE_INTERVAL == 0
 
 
-env = gym.make(ENVIRONMENT)
+env = gym.make(ENVIRONMENT) # CartPole -v1
+
 # if UPLOAD:
 #     env = wrappers.Monitor(env, SESSION_FOLDER, video_callable=record_interval)
-env.seed(RNG_SEED)
-np.random.seed(RNG_SEED)
-tf.set_random_seed(RNG_SEED)
+
+env.seed(RNG_SEED)                              # RNG_SEED = 8
+np.random.seed(RNG_SEED)                        # RNG_SEED = 8
+tf.set_random_seed(RNG_SEED)                    # RNG_SEED = 8
 input_size = env.observation_space.shape[0]
 env._max_episode_steps = 20001 #최대 유지 횟수
 
