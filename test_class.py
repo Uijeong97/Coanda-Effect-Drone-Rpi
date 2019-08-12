@@ -49,7 +49,6 @@ try:
         
         elif command == 'w':
             servo_1.set_speed('increase')
-           
         elif command == 's':
             servo_1.set_speed('decrease')
             
@@ -58,7 +57,7 @@ try:
            
         elif command == 'd':
             servo_2.set_speed('decrease')
-        
+
         elif command == 'stop':
             servo_1.stop()
             servo_2.stop()
