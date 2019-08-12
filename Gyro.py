@@ -4,6 +4,7 @@
 
 import smbus, math, time
 import RPi.GPIO as GPIO
+import csv
 
 class Gyro:
     
@@ -88,3 +89,18 @@ class Gyro:
         y = y / 16384.0
         z = z / 16384.0
         return [x, y, z]
+
+
+gyro=Gyro()
+f = open('gyro_data.csv', 'w')
+wr = csv.writer(f)
+
+try:
+    while True:
+        gyro_x,gyro_y,gyro_z = gyro.get_gyro_data_deg()
+        accel_x,accel_y,accel_z = gyro.get_accel_data_g()
+        wr.writerow([gyro_x,gyro_y,gyro_z,accel_x,accel_y,accel_z])
+        time.sleep(1)
+except:
+        GPIO.cleanup()
+        f.close()

@@ -49,16 +49,16 @@ try:
         
         elif command == 'w':
             servo_1.set_speed('increase')
-            time.sleep(1)
+     
         elif command == 's':
             servo_1.set_speed('decrease')
-            time.sleep(1)
+     
         elif command == 'a':
             servo_2.set_speed('increase')
-            time.sleep(1)
+         
         elif command == 'd':
             servo_2.set_speed('decrease')
-            time.sleep(1)
+   
         elif command == 'stop':
             servo_1.stop()
             servo_2.stop()

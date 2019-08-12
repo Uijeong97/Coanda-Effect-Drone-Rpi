@@ -45,12 +45,15 @@ print 'a,d: left, right\n\n'
 
 try:
     while True:
-        accel_x,accel_y,accel_z = gyro.get_accel_data_g()
-        x_angle = gyro.get_x_rotation(accel_x, accel_y, accel_z)
-        y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
+        # accel_x,accel_y,accel_z = gyro.get_accel_data_g()
+        # x_angle = gyro.get_x_rotation(accel_x, accel_y, accel_z)
+        # y_angle = gyro.get_y_rotation(accel_x, accel_y, accel_z)
         
-        servo_1.motor_ctrl(x_angle)
-        servo_2.motor_ctrl(y_angle)
+        # servo_1.motor_ctrl(x_angle)
+        # servo_2.motor_ctrl(y_angle)
+        # 
+        gyro_x,gyro_y,gyro_z = gyro.get_gyro_data_deg()
+        accel_x,accel_y,accel_z = gyro.get_accel_data_g()
         
         command = raw_input('Enter command: ')
     
@@ -58,25 +61,21 @@ try:
             motor.keyUp()
         elif command == 'l':
             motor.keyDown()
-        
         elif command == 'w':
             servo_1.set_speed('increase')
-            time.sleep(1)
         elif command == 's':
             servo_1.set_speed('decrease')
-            time.sleep(1)
         elif command == 'a':
             servo_2.set_speed('increase')
-            time.sleep(1)
         elif command == 'd':
             servo_2.set_speed('decrease')
-            time.sleep(1)
-        
         elif command == 'c':
             motor.calibrate()
             
 except KeyboardInterrupt:
     print '== servo stop =='
+    
+finally:
 
 servo_1.stop()
 servo_2.stop()
