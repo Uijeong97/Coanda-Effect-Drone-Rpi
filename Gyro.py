@@ -9,13 +9,14 @@ import csv
 class Gyro:
     
     def __init__(self):   #rev = 1 (rpi3B)
-        self.pwr_mgmt_1 = 0x6b
-        self.pwr_mgmt_2 = 0x6c
+        self.pwr_mgmt_1 = 0x6b # pwr mamt register address
+        self.pwr_mgmt_2 = 0x6c # not use
         
         self.bus = smbus.SMBus(1)
         # self.devN = 68 + devNum
-        self.dev_addr = 0x68
+        self.dev_addr = 0x68 # mpu6050 device's i2c basic address
         
+        # if you want to know code below, you can see this on MPU-6050 register table
         self.accel_xout = 0x3b
         self.accel_yout = 0x3d
         self.accel_zout = 0x3f
@@ -63,11 +64,13 @@ class Gyro:
 #-----------------------------------
     # get gyro data
     def get_gyro_data_lsb(self):
-        x = self.read_word_sensor(self.accel_xout)
-        y = self.read_word_sensor(self.accel_yout)
-        z = self.read_word_sensor(self.accel_zout)
+        x = self.read_word_sensor(self.gyro_xout)
+        y = self.read_word_sensor(self.gyro_yout)
+        z = self.read_word_sensor(self.gyro_zout)
         return [x, y, z]
     
+    # get gyro data
+    # FS_SEL register = 0 -> gyro sensor value (1 deg/s = 131)
     def get_gyro_data_deg(self):
         x,y,z = self.get_gyro_data_lsb()
         x = x / 131.0
@@ -83,6 +86,7 @@ class Gyro:
         return [x, y, z]
     
     # get accel data
+    # AFS_SEL register = 0 -> accel sensor value per g = 16384/g
     def get_accel_data_g(self):
         x,y,z = self.get_accel_data_lsb()
         x = x / 16384.0

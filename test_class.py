@@ -15,7 +15,7 @@ from esc_class import bldc_motor
 
 GPIO.setmode(GPIO.BCM)
 
-motor = bldc_motor(4, 2000, 700, 800)
+motor = bldc_motor(4, 2000, 800, 1000)
 servo_1 = Servo(18, GPIO)
 servo_2 = Servo(17, GPIO)
 print "For first time launch, enter calibrate"
@@ -49,16 +49,15 @@ try:
         
         elif command == 'w':
             servo_1.set_speed('increase')
-     
         elif command == 's':
             servo_1.set_speed('decrease')
-     
+            
         elif command == 'a':
             servo_2.set_speed('increase')
-         
+           
         elif command == 'd':
             servo_2.set_speed('decrease')
-   
+
         elif command == 'stop':
             servo_1.stop()
             servo_2.stop()

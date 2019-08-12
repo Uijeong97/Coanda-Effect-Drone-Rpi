@@ -115,10 +115,12 @@ class bldc_motor:
         
     def keyUp(self):
         self.speed += 50
+        print "speed = %d" % self.speed
         self.pi.set_servo_pulsewidth(self.ESC, self.speed)
     
     def keyDown(self):
         self.speed -= 50
+        print "speed = %d" % self.speed
         self.pi.set_servo_pulsewidth(self.ESC, self.speed)
 
          

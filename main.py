@@ -6,7 +6,7 @@ from time import sleep  # time module
 import RPi.GPIO as GPIO
 from Servo import Servo
 from Gyro import Gyro
-from esc_class import bldc_motor
+from bldc_motor import bldc_motor
 
 # ---------------------------------------
 
@@ -31,7 +31,7 @@ servo_2 = Servo(17, GPIO)
 # servo_5 = Servo(17, GPIO)
 # servo_6 = Servo(17, GPIO)
 
-motor = bldc_motor(24, 2000, 700, 800)
+motor = bldc_motor(4, 2000, 700, 800)
 
 print 'Waiting for commands...'
 
@@ -51,9 +51,9 @@ try:
         
         # servo_1.motor_ctrl(x_angle)
         # servo_2.motor_ctrl(y_angle)
-        # 
-        gyro_x,gyro_y,gyro_z = gyro.get_gyro_data_deg()
-        accel_x,accel_y,accel_z = gyro.get_accel_data_g()
+        
+        # gyro_x,gyro_y,gyro_z = gyro.get_gyro_data_deg()
+        # accel_x,accel_y,accel_z = gyro.get_accel_data_g()
         
         command = raw_input('Enter command: ')
     
@@ -69,6 +69,10 @@ try:
             servo_2.set_speed('increase')
         elif command == 'd':
             servo_2.set_speed('decrease')
+        elif command == 'stop':
+            servo_1.stop(1)
+            servo_2.stop(1)
+            motor.stop()
         elif command == 'c':
             motor.calibrate()
             
@@ -76,7 +80,7 @@ except KeyboardInterrupt:
     print '== servo stop =='
     
 finally:
+    servo_1.stop(1)
+    servo_2.stop(1)
+    motor.stop()
 
-servo_1.stop()
-servo_2.stop()
-motor.stop()
