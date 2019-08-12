@@ -77,18 +77,27 @@ def calc_average():
 
 def get_gyro_deg(base_gyX, base_gyY, base_gyZ):
     FS_SEL = 131
-    gyX, gyY, gyZ = 0
+    #gyX, gyY, gyZ = 0
     gyX = (gyro.read_word_sensor(gyro.gyro_xout) - base_gyX) / FS_SEL
     gyY = (gyro.read_word_sensor(gyro.gyro_yout) - base_gyY) / FS_SEL
     gyZ = (gyro.read_word_sensor(gyro.gyro_zout) - base_gyZ) / FS_SEL
-
+    
+    #dt ????
+    gyro_angle_x += gyro_x * dt
+    gyro_angle_y += gyro_y * dt
+    gyro_angle_z += gyro_z * dt
+    #dt = (t_now - get_last_time()) / 1000.0
+    #gyro_angle_x = gyro_x*dt + get_last_x_angle()
+    #gyro_angle_y = gyro_y*dt + get_last_y_angle()
+    #gyro_angle_z = gyro_z*dt + get_last_z_angle()
+    
     return [gyX, gyY, gyZ]
 
 
 
 def get_accel_deg(base_acX, base_acY, base_acZ):
     G_CONVERT = 16384
-    acX, acY, acZ = 0
+    #acX, acY, acZ = 0
     acX = gyro.read_word_sensor(gyro.accel_xout) - base_acX
     acY = gyro.read_word_sensor(gyro.accel_xout) - base_acY
     acZ = gyro.read_word_sensor(gyro.accel_xout) - base_acZ
@@ -96,15 +105,17 @@ def get_accel_deg(base_acX, base_acY, base_acZ):
     return [acX, acY, acZ]
 
 
-base_x_gyro, base_y_gyro, base_z_gyro, base_x_accel, base_y_accel, base_z_accel =calc_average()
-
+base_x_gyro, base_y_gyro, base_z_gyro, base_x_accel, base_y_accel, base_z_accel = calc_average()
+print "base_x_gyro : ", base_x_gyro, "base_y_gyro: ", base_y_gyro, "base_x_gyro: ", base_z_gyro
+print "base_x_accel : ", base_x_accel, "base_y_accel : ", base_y_accel, "base_z_accel : ", base_z_accel
 try:
-    while true:
+    while True:
         gyX, gyY, gyZ = get_gyro_deg(base_x_gyro, base_y_gyro, base_z_gyro)
         acX, acY, acZ = get_accel_deg(base_x_accel, base_y_accel, base_z_accel)
 
         print "gyro_xout: ", gyX,"gyro_yout: ", gyY, "gyro_zout: ", gyZ
         print "accel_xout: ", acX, "accel_yout: ", acY, "accel_zout: ", acZ
+        time.sleep(1)
 except KeyboardInterrupt:
          GPIO.cleanup()
    
