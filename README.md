@@ -16,7 +16,7 @@
 
 ## Class 사용법 <br>
 
-### esc_class.py
+### bldc_motor.py
 Bldc Motor Class <Br>
 code example(test_class.py)
 <pre>
